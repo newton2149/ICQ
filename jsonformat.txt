@@ -1,0 +1,15 @@
+For Private Repos
+
+"GitUrl":
+"isPublic": 
+"Actions": 
+"Username": 
+"Password": 
+
+
+
+For Public Repos
+
+"GitUrl": 
+"isPublic": 
+"Actions":
