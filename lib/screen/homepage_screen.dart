@@ -68,7 +68,38 @@ class HomePageScreen extends StatelessWidget {
                     width: 0.1 * size.width,
                     child: ElevatedButton(
                       onPressed: () {
-                        data.fileSaver(data.item.toString());
+                        if (data.item.length == 0) {
+                          showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text(
+                                    "No Report Found",
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                  content: Text(
+                                    "Please trigger some actions to download the \nbuild report",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  actions: [
+                                    // TextButton(
+                                    //   onPressed: () =>
+                                    //       Navigator.pop(context, 'Cancel'),
+                                    //   child: const Text('Cancel'),
+                                    // ),
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              });
+                        } else {
+                          data.fileSaver(data.item.toString());
+                        }
                       },
                       child: Text("Download"),
                     ),

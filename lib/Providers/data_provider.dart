@@ -9,7 +9,7 @@ import 'package:yaml/yaml.dart';
 import "package:flutter/services.dart" as s;
 
 class DataProvider with ChangeNotifier {
-  bool public = false;
+  bool public = true;
   var username = TextEditingController();
   var password = TextEditingController();
   var gitRepoName = TextEditingController();
@@ -17,6 +17,7 @@ class DataProvider with ChangeNotifier {
   var action = "";
   var responseKeyList = [];
   var responseValueList = [];
+  Map<String, dynamic> verified = {};
 
   Map get toJsonPublic {
     return {
@@ -123,6 +124,44 @@ class DataProvider with ChangeNotifier {
       if (response.statusCode == 201) {
         this.item = jsonDecode(response.body);
         listUpdate();
+        notifyListeners();
+      }
+    } catch (err) {
+      print(err.toString());
+    }
+  }
+
+  Future isVerifiedPublic() async {
+    final Map json = {
+      "GitUrl": gitRepoName.text,
+    };
+    final data = await s.rootBundle.loadString('assets/config.yaml');
+    final mapData = loadYaml(data);
+    try {
+      http.Response response = await http
+          .post(Uri.parse(mapData["httpUrlVerify"]), body: jsonEncode(json));
+      if (response.statusCode == 201) {
+        this.verified = jsonDecode(response.body);
+        notifyListeners();
+      }
+    } catch (err) {
+      print(err.toString());
+    }
+  }
+
+  Future isVerifiedPrivate() async {
+    final Map json = {
+      "GitUrl": gitRepoName.text,
+      "Username": username.text,
+      "Password": password.text,
+    };
+    final data = await s.rootBundle.loadString('assets/config.yaml');
+    final mapData = loadYaml(data);
+    try {
+      http.Response response = await http
+          .post(Uri.parse(mapData["httpUrlVerify"]), body: jsonEncode(json));
+      if (response.statusCode == 201) {
+        this.verified = jsonDecode(response.body);
         notifyListeners();
       }
     } catch (err) {

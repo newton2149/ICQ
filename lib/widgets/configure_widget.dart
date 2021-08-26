@@ -79,7 +79,7 @@ class ConfigureWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              public
+              data.public
                   ? Text("")
                   : Column(children: [
                       SizedBox(
@@ -126,12 +126,51 @@ class ConfigureWidget extends StatelessWidget {
                 width: 0.12 * size.width,
                 child: ElevatedButton(
                     onPressed: () {
+                      if (data.public) {
+                        data.isVerifiedPublic();
+                      } else {
+                        data.isVerifiedPublic();
+                      }
+                      var verified = data.verified["exists"];
+                      // var verified = true;
+                      String displayText = "";
+                      if (verified) {
+                        displayText = "succesfully";
+                      } else {
+                        displayText = "and does not exist";
+                      }
+                      showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text(
+                                "Verification Status",
+                                style: TextStyle(color: Colors.red),
+                              ),
+                              content: Text(
+                                "${data.gitRepoName.text} verified $displayText with  \nbranch -> ${data.verified["fullBranchName"]} ",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context, 'OK');
+                                    data.verified = {};
+                                  },
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            );
+                          });
+
                       print(data.gitRepoName.text);
                     },
                     child: Text("Verify")),
               )
             ],
-          )
+          ),
         ],
       ),
     );
