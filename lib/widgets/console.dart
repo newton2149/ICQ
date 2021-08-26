@@ -11,7 +11,7 @@ class Console extends StatelessWidget {
     final data = Provider.of<DataProvider>(context);
     return Container(
       padding: EdgeInsets.all(20),
-      width: size.width * 0.7,
+      width: size.width * 0.65,
       height: size.height * 0.5,
       decoration: BoxDecoration(color: Colors.black),
       child: ListView.builder(

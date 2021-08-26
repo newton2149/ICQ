@@ -13,7 +13,7 @@ class ConfigureWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       padding: EdgeInsets.only(top: 30, left: 45),
-      margin: EdgeInsets.only(bottom: 30),
+      margin: EdgeInsets.only(bottom: 5),
       child: Column(
         children: [
           Row(
@@ -132,7 +132,7 @@ class ConfigureWidget extends StatelessWidget {
                         data.isVerifiedPublic();
                       }
                       var verified = data.verified["exists"];
-                      // var verified = true;
+                      //  
                       String displayText = "";
                       if (verified) {
                         displayText = "succesfully";

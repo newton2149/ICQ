@@ -8,6 +8,8 @@ class ActioButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    double w = 200;
+    double height = 30;
     final data = Provider.of<DataProvider>(context, listen: false);
     return Container(
       decoration: BoxDecoration(
@@ -15,8 +17,8 @@ class ActioButtons extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       padding: EdgeInsets.only(top: 30, bottom: 30),
-      height: size.height * 0.4,
-      width: 0.14 * size.width,
+      height: 400,
+      width: 250,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -29,7 +31,8 @@ class ActioButtons extends StatelessWidget {
             ),
           ),
           Container(
-            width: 0.1 * size.width,
+            width: w,
+            height: height,
             child: ElevatedButton(
               onPressed: () {
                 // print(data.gitRepoName.text);
@@ -50,7 +53,8 @@ class ActioButtons extends StatelessWidget {
             ),
           ),
           Container(
-            width: 0.1 * size.width,
+            width: w,
+            height: height,
             child: ElevatedButton(
               onPressed: () {
                 data.itemClear();
@@ -70,7 +74,8 @@ class ActioButtons extends StatelessWidget {
             ),
           ),
           Container(
-            width: 0.1 * size.width,
+            width: w,
+            height: height,
             child: ElevatedButton(
               onPressed: () {
                 data.itemClear();
@@ -90,7 +95,8 @@ class ActioButtons extends StatelessWidget {
             ),
           ),
           Container(
-            width: 0.1 * size.width,
+            width: w,
+            height: height,
             child: ElevatedButton(
               onPressed: () {
                 data.itemClear();
@@ -110,7 +116,8 @@ class ActioButtons extends StatelessWidget {
             ),
           ),
           Container(
-            width: 0.1 * size.width,
+            width: w,
+            height: height,
             child: ElevatedButton(
               onPressed: () {
                 data.itemClear();
@@ -130,7 +137,8 @@ class ActioButtons extends StatelessWidget {
             ),
           ),
           Container(
-            width: 0.1 * size.width,
+            width: w,
+            height: height,
             child: ElevatedButton(
               onPressed: () {
                 data.itemClear();

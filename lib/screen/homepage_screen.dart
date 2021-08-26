@@ -55,6 +55,9 @@ class HomePageScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ActioButtons(),
+                    SizedBox(
+                      width: 20,
+                    ),
                     Console(),
                   ],
                 ),
