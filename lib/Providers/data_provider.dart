@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/Material.dart';
 import 'package:http/http.dart' as http;
-// ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 import 'package:yaml/yaml.dart';
 import "package:flutter/services.dart" as s;
