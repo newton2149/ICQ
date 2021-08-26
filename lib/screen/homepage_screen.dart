@@ -12,7 +12,6 @@ class HomePageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final data = Provider.of<DataProvider>(context, listen: false);
-
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
