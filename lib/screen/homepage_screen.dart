@@ -11,7 +11,8 @@ class HomePageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    
+    final data = Provider.of<DataProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
           elevation: 0,
@@ -60,13 +61,30 @@ class HomePageScreen extends StatelessWidget {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+                  Spacer(),
                   Container(
                     width: 0.1 * size.width,
                     child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text("Save"),
+                      onPressed: () {
+                        data.fileSaver(data.item.toString());
+                      },
+                      child: Text("Download"),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  Container(
+                    width: 0.1 * size.width,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        data.itemClear();
+                        data.responseKeyList = [];
+                        data.responseValueList = [];
+                      },
+                      child: Text("Clear"),
                     ),
                   ),
                   SizedBox(

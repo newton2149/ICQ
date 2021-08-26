@@ -5,8 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/Material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
-// import 'package:yaml/yaml.dart';
-// import "package:flutter/services.dart" as s;
+import 'dart:html' as html;
+
+import 'package:yaml/yaml.dart';
+import 'package:yaml/yaml.dart';
+import "package:flutter/services.dart" as s;
 
 class DataProvider with ChangeNotifier {
   bool public = false;
@@ -40,18 +43,6 @@ class DataProvider with ChangeNotifier {
     this.public = str;
   }
 
-  // set userName(String str) {
-  //   this.userName = str;
-  // }
-
-  // set passWord(String str) {
-  //   this.passWord = str;
-  // }
-
-  // set gitRepoNameSetter(String str) {
-  //   this.gitRepoName = str;
-  // }
-
   void falser() {
     this.public = !this.public;
     notifyListeners();
@@ -64,39 +55,45 @@ class DataProvider with ChangeNotifier {
     });
   }
 
-  Future<String> get _localPath async {
-    final directory = await getApplicationDocumentsDirectory();
+  void fileSaver(String text) {
+    // final text = 'this is the text file';
+// prepare
+    final bytes = utf8.encode(text);
+    final blob = html.Blob([bytes]);
+    final url = html.Url.createObjectUrlFromBlob(blob);
+    final anchor = html.document.createElement('a') as html.AnchorElement
+      ..href = url
+      ..style.display = 'none'
+      ..download = '${DateTime.now()}.txt';
+    html.document.body!.children.add(anchor);
 
-    return directory.path;
-  }
+// download
+    anchor.click();
 
-  Future<File> get _localFile async {
-    final path = await _localPath;
-    return File('$path/${DateTime.now()}.txt');
-  }
-
-  Future<File> writeFile(String str) async {
-    final file = await _localFile;
-    return file.writeAsString(str);
+// cleanup
+    html.document.body!.children.remove(anchor);
+    html.Url.revokeObjectUrl(url);
   }
 
   Future postMethodPublic(String action) async {
     print("Entered PostMethod Public");
-    // final data = await s.rootBundle.loadString('assets/config.yaml');
-    // final mapData = jsonDecode(loadYaml(data)) as Map;
+    final data = await s.rootBundle.loadString('assets/config.yaml');
+    final mapData = loadYaml(data);
+    print(mapData);
+
     try {
       http.Response response = await http.get(
-        Uri.parse("https://reqres.in/api/users/2 "),
+        Uri.parse(mapData["httpUrl"]),
         // body: {
         //   "GitUrl": gitRepoName.text,
         //   "isPublic": public,
         //   "Actions": action,
         // },
       );
+      print("sa");
       if (response.statusCode == 200) {
         this.item = jsonDecode(response.body);
         listUpdate();
-        // writeFile(this.item.toString()).then((value) => print("File saved"));
         notifyListeners();
       }
     } catch (err) {
@@ -110,6 +107,9 @@ class DataProvider with ChangeNotifier {
   }
 
   Future postMethodPrivate(String action) async {
+    final data = await s.rootBundle.loadString('assets/config.yaml');
+    final mapData = loadYaml(data);
+    print(mapData);
     print("Entered PostMethod Private");
     final Map json = {
       "GitUrl": gitRepoName.text,
@@ -120,8 +120,7 @@ class DataProvider with ChangeNotifier {
     };
 
     try {
-      http.Response response = await http.post(
-          Uri.parse("https://reqres.in/api/users"),
+      http.Response response = await http.post(Uri.parse(mapData["httpUrl"]),
           body: jsonEncode(json));
       if (response.statusCode == 201) {
         this.item = jsonDecode(response.body);
