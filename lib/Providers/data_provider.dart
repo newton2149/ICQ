@@ -80,15 +80,16 @@ class DataProvider with ChangeNotifier {
     final data = await s.rootBundle.loadString('assets/config.yaml');
     final mapData = loadYaml(data);
     print(mapData);
+    final Map json = {
+      "GitUrl": gitRepoName.text,
+      "isPublic": public,
+      "Actions": action,
+    };
 
     try {
-      http.Response response = await http.get(
+      http.Response response = await http.post(
         Uri.parse(mapData["httpUrl"]),
-        // body: {
-        //   "GitUrl": gitRepoName.text,
-        //   "isPublic": public,
-        //   "Actions": action,
-        // },
+        body: jsonEncode(json),
       );
       print("sa");
       if (response.statusCode == 200) {
