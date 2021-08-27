@@ -9,23 +9,29 @@ class Console extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final data = Provider.of<DataProvider>(context);
-    return Container(
-      padding: EdgeInsets.all(20),
-      width: size.width * 0.65,
-      height: size.height * 0.5,
-      decoration: BoxDecoration(color: Colors.black),
-      child: ListView.builder(
-        itemBuilder: (ctx, i) {
-          return Text(
-            "${data.responseKeyList[i]} : ${data.responseValueList[i]} \n",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-          );
-        },
-        itemCount: data.responseKeyList.length,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: Container(
+          padding: EdgeInsets.all(20),
+          width: size.width * 0.7,
+          height: size.height * 0.7,
+          decoration: BoxDecoration(color: Colors.black),
+          child: ListView.builder(
+            itemBuilder: (ctx, i) {
+              return Text(
+                "${data.responseKeyList[i]} : ${data.responseValueList[i]} \n",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              );
+            },
+            itemCount: data.responseKeyList.length,
+          ),
+        ),
       ),
     );
   }

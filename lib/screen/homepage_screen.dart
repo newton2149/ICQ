@@ -39,95 +39,97 @@ class HomePageScreen extends StatelessWidget {
               ),
             ),
           )),
-      body: ListView(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ConfigureWidget(),
-              Divider(
-                thickness: 5,
-                color: Colors.blue,
-              ),
-              Container(
-                padding: EdgeInsets.all(30),
-                child: Row(
+      body: Scrollbar(
+        child: ListView(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ConfigureWidget(),
+                Divider(
+                  thickness: 5,
+                  color: Colors.blue,
+                ),
+                Container(
+                  padding: EdgeInsets.all(30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ActioButtons(),
+                      // SizedBox(
+                      //   width:,
+                      // ),
+                      Console(),
+                    ],
+                  ),
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    ActioButtons(),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Console(),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Spacer(),
-                  Container(
-                    width: 0.1 * size.width,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (data.item.length == 0) {
-                          showDialog<String>(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text(
-                                    "No Report Found",
-                                    style: TextStyle(color: Colors.red),
-                                  ),
-                                  content: Text(
-                                    "Please trigger some actions to download the \nbuild report",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  actions: [
-                                    // TextButton(
-                                    //   onPressed: () =>
-                                    //       Navigator.pop(context, 'Cancel'),
-                                    //   child: const Text('Cancel'),
-                                    // ),
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(context, 'OK'),
-                                      child: const Text('OK'),
+                    Spacer(),
+                    Container(
+                      width: 0.1 * size.width,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (data.item.length == 0) {
+                            showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text(
+                                      "No Report Found",
+                                      style: TextStyle(color: Colors.red),
                                     ),
-                                  ],
-                                );
-                              });
-                        } else {
-                          data.fileSaver(data.item.toString());
-                        }
-                      },
-                      child: Text("Download"),
+                                    content: Text(
+                                      "Please trigger some actions to download the \nbuild report",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    actions: [
+                                      // TextButton(
+                                      //   onPressed: () =>
+                                      //       Navigator.pop(context, 'Cancel'),
+                                      //   child: const Text('Cancel'),
+                                      // ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'OK'),
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  );
+                                });
+                          } else {
+                            data.fileSaver(data.item.toString());
+                          }
+                        },
+                        child: Text("Download"),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  Container(
-                    width: 0.1 * size.width,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        data.itemClear();
-                        data.responseKeyList = [];
-                        data.responseValueList = [];
-                      },
-                      child: Text("Clear"),
+                    SizedBox(
+                      width: 40,
                     ),
-                  ),
-                  SizedBox(
-                    width: 40,
-                  )
-                ],
-              )
-            ],
-          ),
-        ],
+                    Container(
+                      width: 0.1 * size.width,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          data.itemClear();
+                          data.responseKeyList = [];
+                          data.responseValueList = [];
+                        },
+                        child: Text("Clear"),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 40,
+                    )
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

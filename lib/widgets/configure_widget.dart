@@ -12,7 +12,7 @@ class ConfigureWidget extends StatelessWidget {
     final data = Provider.of<DataProvider>(context);
     Size size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.only(top: 30, left: 45),
+      padding: EdgeInsets.only(top: 25, left: 45),
       margin: EdgeInsets.only(bottom: 5),
       child: Column(
         children: [
@@ -23,9 +23,9 @@ class ConfigureWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      "Repo Name : ",
+                      "Git Url: ",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -45,7 +45,7 @@ class ConfigureWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              Column(
+              Row(
                 children: [
                   Container(
                     width: size.width * 0.12,
@@ -132,7 +132,7 @@ class ConfigureWidget extends StatelessWidget {
                         data.isVerifiedPublic();
                       }
                       var verified = data.verified["exists"];
-                      //  
+                      //
                       String displayText = "";
                       if (verified) {
                         displayText = "succesfully";
