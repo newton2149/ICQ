@@ -21,6 +21,7 @@ class ConfigureWidget extends StatelessWidget {
             children: [
               Container(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
                       "Git Url: ",
@@ -31,7 +32,7 @@ class ConfigureWidget extends StatelessWidget {
                     ),
                     Container(
                       height: 60,
-                      width: 0.2 * size.width,
+                      width: 0.3 * size.width,
                       child: TextField(
                         controller: data.gitRepoName,
                         textAlignVertical: TextAlignVertical.top,
