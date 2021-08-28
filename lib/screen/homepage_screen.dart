@@ -39,6 +39,35 @@ class HomePageScreen extends StatelessWidget {
               ),
             ),
           )),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              child: Text(
+                "Available Scans ",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.justify,
+              ),
+              curve: Curves.bounceIn,
+              padding: EdgeInsets.all(70),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+              ),
+            ),
+            SizedBox(
+              height: 45,
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            ActioButtons(),
+          ],
+        ),
+      ),
       body: Scrollbar(
         isAlwaysShown: true,
         child: ListView(
@@ -59,7 +88,7 @@ class HomePageScreen extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          ActioButtons(),
+                          // ActioButtons(),
                           // Spacer(),
                           SizedBox(
                             height: 20,
@@ -116,7 +145,7 @@ class HomePageScreen extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                height: 40,
+                                height: 20,
                               ),
                               Container(
                                 width: 200,

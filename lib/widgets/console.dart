@@ -16,7 +16,7 @@ class Console extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(20),
           width: size.width * 0.7,
-          height: size.height * 0.7,
+          height: size.height * 0.6,
           decoration: BoxDecoration(color: Colors.black),
           child: ListView.builder(
             itemBuilder: (ctx, i) {
