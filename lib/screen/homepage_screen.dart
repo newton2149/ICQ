@@ -40,6 +40,7 @@ class HomePageScreen extends StatelessWidget {
             ),
           )),
       body: Scrollbar(
+        isAlwaysShown: true,
         child: ListView(
           children: [
             Column(
@@ -125,6 +126,9 @@ class HomePageScreen extends StatelessWidget {
                       width: 40,
                     )
                   ],
+                ),
+                Divider(
+                  height: 20,
                 )
               ],
             ),
